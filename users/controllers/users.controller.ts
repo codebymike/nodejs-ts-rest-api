@@ -28,6 +28,7 @@ class UsersController {
             req.body.password = await argon2.hash(req.body.password)
         }
         log(await usersService.patchById(req.body.id, req.body))
+        // https://tools.ietf.org/html/rfc7231#section-6.3.5 
         res.status(204).send()
     }
 
