@@ -7,6 +7,16 @@ const log: debug.IDebugger = debug('app:users-controller')
 
 class UsersMiddleware {
 
+    // helper to add id to each req body
+    async extractUserId(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        req.body.id = req.params.userId;
+        next();
+    }
+
     async validateRequiredUserBodyFields(
         req: express.Request,
         res: express.Response,
