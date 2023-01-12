@@ -54,6 +54,23 @@ class UsersDao {
             .exec()
     }
 
+    async updateUserById(
+        userId: string,
+        userFields: PatchUserDto | PutUserDto
+    ) {
+        const existingUser = await this.User.findOneAndUpdate(
+            { _id: userId },
+            { $set: userFields },
+            { new: true }
+        ).exec()
+    
+        return existingUser
+    }
+
+    async removeUserById(userId: string) {
+        return this.User.deleteOne({ _id: userId }).exec()
+    }
+
 }
 
 export default new UsersDao()
