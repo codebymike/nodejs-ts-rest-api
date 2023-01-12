@@ -16,7 +16,7 @@ class UsersDao {
     userSchema = new this.Schema({
         _id: String,
         email: String,
-        password: { type: String, select: false },
+        password: { type: String, select: false }, //auto hide
         firstName: String,
         lastName: String,
         permissionFlags: Number,
