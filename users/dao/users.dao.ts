@@ -1,22 +1,19 @@
 import mongooseService from '../../common/services/mongoose.service'
-
+import shortid from 'shortid'
+import debug from 'debug'
 import { CreateUserDto } from '../dto/create.user.dto'
 import { PatchUserDto } from '../dto/patch.user.dto'
 import { PutUserDto } from '../dto/put.user.dto'
 
-import shortid from 'shortid'
-import debug from 'debug'
-
-const log: debug.IDebugger = debug('app:in-memory-dao')
+const log: debug.IDebugger = debug('app:users-dao')
 
 class UsersDao {
-
     Schema = mongooseService.getMongoose().Schema
 
     userSchema = new this.Schema({
         _id: String,
         email: String,
-        password: { type: String, select: false }, //auto hide
+        password: { type: String, select: false },
         firstName: String,
         lastName: String,
         permissionFlags: Number,
@@ -42,11 +39,21 @@ class UsersDao {
     async getUserByEmail(email: string) {
         return this.User.findOne({ email: email }).exec()
     }
-    
+
+    async getUserByEmailWithPassword(email: string) {
+        return this.User.findOne({ email: email })
+            .select('_id email permissionFlags +password')
+            .exec()
+    }
+
+    async removeUserById(userId: string) {
+        return this.User.deleteOne({ _id: userId }).exec()
+    }
+
     async getUserById(userId: string) {
         return this.User.findOne({ _id: userId }).populate('User').exec()
     }
-    
+
     async getUsers(limit = 25, page = 0) {
         return this.User.find()
             .limit(limit)
@@ -63,14 +70,9 @@ class UsersDao {
             { $set: userFields },
             { new: true }
         ).exec()
-    
+
         return existingUser
     }
-
-    async removeUserById(userId: string) {
-        return this.User.deleteOne({ _id: userId }).exec()
-    }
-
 }
 
-export default new UsersDao()
+export default new UsersDao();
