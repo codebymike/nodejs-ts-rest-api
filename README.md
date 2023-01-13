@@ -3,8 +3,10 @@
 A REST api project stub for a single entity, users.
 
 ## Utilising
-- Winston for logging
+- Winston (logging)
 - DTOs/DAOs
+- Mongoose
+- Express Validator
 
 ## Control Flow
 - HTTP Request
