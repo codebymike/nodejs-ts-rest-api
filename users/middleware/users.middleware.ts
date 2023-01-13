@@ -13,8 +13,8 @@ class UsersMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) {
-        req.body.id = req.params.userId;
-        next();
+        req.body.id = req.params.userId
+        next()
     }
     
     async validateSameEmailDoesntExist(
