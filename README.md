@@ -4,8 +4,8 @@ A REST api project stub for a single entity, users.
 
 ## Utilising
 - Winston (logging)
-- DTOs/DAOs
-- Mongoose
+- Data Type/Access Objects
+- Mongoose/MongoDB
 - Express Validator
 
 ## Control Flow
