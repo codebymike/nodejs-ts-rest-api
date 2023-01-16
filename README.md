@@ -7,6 +7,7 @@ A REST api project stub for a single entity, users.
 - Data Type/Access Objects
 - Winston (logging)
 - Express Validator
+- JWTs
 
 ## Control Flow
 - HTTP Request
