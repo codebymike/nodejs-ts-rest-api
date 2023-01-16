@@ -8,6 +8,7 @@ import dotenv from 'dotenv'
 
 import { CommonRoutesConfig } from './common/common.routes.config'
 import { UsersRoutes } from './users/users.routes.config'
+import { AuthRoutes } from './auth/auth.routes.config'
 
 const dotenvResult = dotenv.config()
 if (dotenvResult.error) throw dotenvResult.error
@@ -39,7 +40,9 @@ if (!process.env.DEBUG) {
 
 app.use(expressWinston.logger(loggerOptions))
 
-routes.push(new UsersRoutes(app)) // routes added to our app
+// routes added to our app
+routes.push(new AuthRoutes(app))
+routes.push(new UsersRoutes(app))
 
 // canary
 const runningMessage = `Server running at http://localhost:${port}`
