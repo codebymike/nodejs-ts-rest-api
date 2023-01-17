@@ -53,6 +53,7 @@ class JwtMiddleware {
         }
     }
 
+    //  also verifies if the refresh token is correct for a specific user ID
     validJWTNeeded(
         req: express.Request,
         res: express.Response,
