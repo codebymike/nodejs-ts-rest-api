@@ -1,16 +1,16 @@
-import { body } from 'express-validator';
 import express from 'express'
+import { body } from 'express-validator'
 
 import { CommonRoutesConfig } from '../common/common.routes.config'
-import BodyValidationMiddleware from '../common/middleware/body.validation.middleware'
 import UsersController from './controllers/users.controller'
 import UsersMiddleware from './middleware/users.middleware'
 import jwtMiddleware from '../auth/middleware/jwt.middleware'
 import permissionMiddleware from '../common/middleware/common.permission.middleware'
 import { PermissionFlag } from '../common/middleware/common.permissionflag.enum'
+import BodyValidationMiddleware from '../common/middleware/body.validation.middleware'
+
 
 export class UsersRoutes extends CommonRoutesConfig {
-
     constructor(app: express.Application) {
         super(app, 'UsersRoutes')
     }
@@ -36,7 +36,6 @@ export class UsersRoutes extends CommonRoutesConfig {
             )
 
         this.app.param(`userId`, UsersMiddleware.extractUserId)
-        
         this.app
             .route(`/users/:userId`)
             .all(
@@ -57,6 +56,10 @@ export class UsersRoutes extends CommonRoutesConfig {
             body('permissionFlags').isInt(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
             UsersMiddleware.validateSameEmailBelongToSameUser,
+            UsersMiddleware.userCantChangePermission,
+            permissionMiddleware.permissionFlagRequired(
+                PermissionFlag.PAID_PERMISSION
+            ),
             UsersController.put,
         ])
 
@@ -71,6 +74,10 @@ export class UsersRoutes extends CommonRoutesConfig {
             body('permissionFlags').isInt().optional(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
             UsersMiddleware.validatePatchEmail,
+            UsersMiddleware.userCantChangePermission,
+            permissionMiddleware.permissionFlagRequired(
+                PermissionFlag.PAID_PERMISSION
+            ),
             UsersController.patch,
         ])
 
