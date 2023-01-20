@@ -36,6 +36,9 @@ const loggerOptions: expressWinston.LoggerOptions = {
 
 if (!process.env.DEBUG) {
     loggerOptions.meta = false; // log requests as one-liners
+    if (typeof global.it === 'function') {
+        loggerOptions.level = 'http' // silence
+    }
 }
 
 app.use(expressWinston.logger(loggerOptions))
