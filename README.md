@@ -3,11 +3,12 @@
 A REST api project stub for a single entity, users.
 
 ## Utilising
-- Mongoose/MongoDB
-- Data Type/Access Objects
-- Winston (logging)
+- Docker
+- MongoDB (Mongoose)
+- Data Type/Access Object Pattern
+- Winston
 - Express Validator
-- JWTs
+- JWTs for Auth
 
 ## Control Flow
 - HTTP Request
