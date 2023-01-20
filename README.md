@@ -9,6 +9,7 @@ A REST api project stub for a single entity, users.
 - Winston
 - Express Validator
 - JWTs for Auth
+- Chai, Mocha, Supertest
 
 ## Control Flow
 - HTTP Request
