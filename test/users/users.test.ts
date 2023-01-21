@@ -51,12 +51,23 @@ describe('users and auth endpoints', function () {
         const res = await request
             .get(`/users/${firstUserIdTest}`)
             .set({ Authorization: `Bearer ${accessToken}` })
-            .send();
-        expect(res.status).to.equal(200);
-        expect(res.body).not.to.be.empty;
-        expect(res.body).to.be.an('object');
-        expect(res.body._id).to.be.a('string');
-        expect(res.body._id).to.equal(firstUserIdTest);
-        expect(res.body.email).to.equal(firstUserBody.email);
+            .send()
+        expect(res.status).to.equal(200)
+        expect(res.body).not.to.be.empty
+        expect(res.body).to.be.an('object')
+        expect(res.body._id).to.be.a('string')
+        expect(res.body._id).to.equal(firstUserIdTest)
+        expect(res.body.email).to.equal(firstUserBody.email)
     })
+
+    describe('with a valid access token', function () {
+        it('should disallow a GET to /users', async function () {
+            const res = await request
+                .get(`/users`)
+                .set({ Authorization: `Bearer ${accessToken}` })
+                .send()
+            expect(res.status).to.equal(403)
+        })
+    })
+    
 })
