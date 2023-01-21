@@ -36,4 +36,14 @@ describe('users and auth endpoints', function () {
         expect(res.body.id).to.be.a('string')
         firstUserIdTest = res.body.id
     })
+
+    it('should allow a POST to /auth', async function () {
+        const res = await request.post('/auth').send(firstUserBody)
+        expect(res.status).to.equal(201)
+        expect(res.body).not.to.be.empty
+        expect(res.body).to.be.an('object')
+        expect(res.body.accessToken).to.be.a('string')
+        accessToken = res.body.accessToken
+        refreshToken = res.body.refreshToken
+    })
 })
