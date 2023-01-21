@@ -46,4 +46,17 @@ describe('users and auth endpoints', function () {
         accessToken = res.body.accessToken
         refreshToken = res.body.refreshToken
     })
+
+    it('should allow a GET from /users/:userId with an access token', async function () {
+        const res = await request
+            .get(`/users/${firstUserIdTest}`)
+            .set({ Authorization: `Bearer ${accessToken}` })
+            .send();
+        expect(res.status).to.equal(200);
+        expect(res.body).not.to.be.empty;
+        expect(res.body).to.be.an('object');
+        expect(res.body._id).to.be.a('string');
+        expect(res.body._id).to.equal(firstUserIdTest);
+        expect(res.body.email).to.equal(firstUserBody.email);
+    })
 })
