@@ -26,4 +26,14 @@ describe('users and auth endpoints', function () {
             mongoose.connection.close(done)
         })
     })
+
+    it('should allow a POST to /users', async function () {
+        const res = await request.post('/users').send(firstUserBody)
+
+        expect(res.status).to.equal(201)
+        expect(res.body).not.to.be.empty
+        expect(res.body).to.be.an('object')
+        expect(res.body.id).to.be.a('string')
+        firstUserIdTest = res.body.id
+    })
 })
