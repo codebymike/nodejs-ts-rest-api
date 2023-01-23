@@ -18,3 +18,6 @@ A REST api project stub for a single entity (users).
 - > if middleware are validated, controllers connect request to correct users.service methods
 - > services call applicable methods from 'Data Access Object', users.dao 
 - > DAO uses Data Type Objects for typing, uses.dto
+
+## TODO
+- Secure /users/:userId/permissionFlags/:permissionFlags
