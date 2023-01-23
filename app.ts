@@ -5,6 +5,7 @@ import * as expressWinston from 'express-winston'
 import cors from 'cors'
 import debug from 'debug'
 import dotenv from 'dotenv'
+import helmet from 'helmet'
 
 import { CommonRoutesConfig } from './common/common.routes.config'
 import { UsersRoutes } from './users/users.routes.config'
@@ -42,6 +43,8 @@ if (!process.env.DEBUG) {
 }
 
 app.use(expressWinston.logger(loggerOptions))
+
+app.use(helmet())
 
 // routes added to our app
 routes.push(new AuthRoutes(app))
