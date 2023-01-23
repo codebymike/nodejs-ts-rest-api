@@ -7,6 +7,7 @@ A REST api project stub for a single entity (users).
 - MongoDB (Mongoose)
 - Data Type/Access Object Pattern
 - Winston
+- Helmet
 - Express Validator
 - JWTs for Auth
 - Chai, Mocha, Supertest
