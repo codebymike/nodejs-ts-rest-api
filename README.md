@@ -1,6 +1,6 @@
-# Typescript Node/Express REST Api
+# Typescript NodeJS/Express REST Api
 
-A REST api project stub for a single entity, users.
+A REST api project stub for a single entity (users).
 
 ## Utilising
 - Docker
